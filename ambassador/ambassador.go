@@ -13,7 +13,7 @@ var err error
 func ConnLogServer() (error) {
 
 	//You should insert the log server's IP address directly on the code or map it to the DNS address within the host file.
-        conn, err = net.Dial("tcp", "logServer:9617")
+        conn, err = net.Dial("tcp", "127.0.0.1:9617")
         if nil != err{
                 fmt.Println("GDCPE Log Server connection error")
         }
