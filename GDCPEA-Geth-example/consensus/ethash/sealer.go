@@ -171,8 +171,8 @@ search:
 			if new(big.Int).SetBytes(result).Cmp(target) <= 0 {
 				// Correct nonce found, create a new header with it
 				t := time.Now().UnixNano()/1000
-
-				GDCPEA.WriteEvalLog(","+t+",mined block,"+strconv.FormatInt(attempts,10)+","+block.TxHash().String()+","+strconv.FormatUint(number,10))
+				s := strconv.FormatInt(t,10)
+				GDCPEA.WriteEvalLog(","+s+",mined block,"+strconv.FormatInt(attempts,10)+","+block.TxHash().String()+","+strconv.FormatUint(number,10))
 				
 				header = types.CopyHeader(header)
 				header.Nonce = types.EncodeNonce(nonce)
