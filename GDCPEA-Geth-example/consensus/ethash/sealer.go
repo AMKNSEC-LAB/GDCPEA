@@ -170,7 +170,9 @@ search:
 			digest, result := hashimotoFull(dataset.dataset, hash, nonce)
 			if new(big.Int).SetBytes(result).Cmp(target) <= 0 {
 				// Correct nonce found, create a new header with it
-				GDCPEA.WriteEvalLog(",mined block,"+strconv.FormatInt(attempts,10)+","+block.TxHash().String()+","+strconv.FormatUint(number,10))
+				t := time.Now().UnixNano()/1000
+
+				GDCPEA.WriteEvalLog(","+t+",mined block,"+strconv.FormatInt(attempts,10)+","+block.TxHash().String()+","+strconv.FormatUint(number,10))
 				
 				header = types.CopyHeader(header)
 				header.Nonce = types.EncodeNonce(nonce)
