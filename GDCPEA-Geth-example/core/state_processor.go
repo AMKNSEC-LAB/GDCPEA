@@ -93,7 +93,8 @@ func (p *StateProcessor) Process(block *types.Block, statedb *state.StateDB, cfg
 
 func applyTransaction(msg types.Message, config *params.ChainConfig, bc ChainContext, author *common.Address, gp *GasPool, statedb *state.StateDB, header *types.Header, tx *types.Transaction, usedGas *uint64, evm *vm.EVM) (*types.Receipt, error) {
 	t := time.Now().UnixNano()/1000
-	GDCPEA.WriteEvalLog(","+t+",committing transaction,"+msg.From().String()+","+tx.Hash().String()+",null")
+	s := strconv.FormatInt(t,10)
+	GDCPEA.WriteEvalLog(","+s+",committing transaction,"+msg.From().String()+","+tx.Hash().String()+",null")
 	
 	// Create a new context to be used in the EVM environment.
 	txContext := NewEVMTxContext(msg)
@@ -137,7 +138,8 @@ func applyTransaction(msg types.Message, config *params.ChainConfig, bc ChainCon
 	receipt.BlockNumber = header.Number
 	receipt.TransactionIndex = uint(statedb.TxIndex())
 	t := time.Now().UnixNano()/1000
-	GDCPEA.WriteEvalLog(","+t+",committed transaction,"+msg.From().String()+","+tx.Hash().String()+",null")
+	s := strconv.FormatInt(t,10)
+	GDCPEA.WriteEvalLog(","+s+",committed transaction,"+msg.From().String()+","+tx.Hash().String()+",null")
 
 	return receipt, err
 }
