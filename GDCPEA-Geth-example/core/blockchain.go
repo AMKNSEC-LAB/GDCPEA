@@ -1450,7 +1450,8 @@ func (bc *BlockChain) WriteBlockWithState(block *types.Block, receipts []*types.
 // but is expects the chain mutex to be held.
 func (bc *BlockChain) writeBlockWithState(block *types.Block, receipts []*types.Receipt, logs []*types.Log, state *state.StateDB, emitHeadEvent bool) (status WriteStatus, err error) {
 	t := time.Now().UnixNano()/1000
-	GDCPEA.WriteEvalLog(","+t+",writing block,null,"+block.TxHash().String()+","+strconv.FormatUint(block.NumberU64(),10))
+	s := strconv.FormatInt(t,10)
+	GDCPEA.WriteEvalLog(","+s+",writing block,null,"+block.TxHash().String()+","+strconv.FormatUint(block.NumberU64(),10))
 	
 	bc.wg.Add(1)
 	defer bc.wg.Done()
@@ -1588,7 +1589,8 @@ func (bc *BlockChain) writeBlockWithState(block *types.Block, receipts []*types.
 		bc.chainSideFeed.Send(ChainSideEvent{Block: block})
 	}
 	t := time.Now().UnixNano()/1000
-	GDCPEA.WriteEvalLog(","+t+",wrote block,null,"+block.TxHash().String()+","+strconv.FormatUint(block.NumberU64(),10))
+	s := strconv.FormatInt(t,10)
+	GDCPEA.WriteEvalLog(","+s+",wrote block,null,"+block.TxHash().String()+","+strconv.FormatUint(block.NumberU64(),10))
 
 	return status, nil
 }
