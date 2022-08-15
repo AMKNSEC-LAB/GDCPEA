@@ -512,8 +512,9 @@ func (h *handler) minedBroadcastLoop() {
 
 	for obj := range h.minedBlockSub.Chan() {
 		if ev, ok := obj.Data.(core.NewMinedBlockEvent); ok {
-			
-			GDCPEA.WriteEvalLog(",propagating block,null,"+ev.Block.TxHash().String()+","+strconv.FormatUint(ev.Block.NumberU64(),10))
+			t := time.Now().UnixNano()/1000
+
+			GDCPEA.WriteEvalLog(","+t+",propagating block,null,"+ev.Block.TxHash().String()+","+strconv.FormatUint(ev.Block.NumberU64(),10))
 			
 			h.BroadcastBlock(ev.Block, true)  // First propagate block to peers
 			h.BroadcastBlock(ev.Block, false) // Only then announce to the rest
