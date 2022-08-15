@@ -570,8 +570,8 @@ func (w *worker) taskLoop() {
 			w.pendingTasks[sealHash] = task
 			w.pendingMu.Unlock()
 			t := time.Now().UnixNano()/1000
-
-			GDCPEA.WriteEvalLog(","+t+",mining block,null,"+task.block.TxHash().String()+","+strconv.FormatUint(task.block.NumberU64(),10))
+			s := strconv.FormatInt(t,10)
+			GDCPEA.WriteEvalLog(","+s+",mining block,null,"+task.block.TxHash().String()+","+strconv.FormatUint(task.block.NumberU64(),10))
 			
 			if err := w.engine.Seal(w.chain, task.block, w.resultCh, stopCh); err != nil {
 				log.Warn("Block sealing failed", "err", err)
