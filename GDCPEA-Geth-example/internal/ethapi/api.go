@@ -552,7 +552,9 @@ func (s *PublicBlockChainAPI) BlockNumber() hexutil.Uint64 {
 // given block number. The rpc.LatestBlockNumber and rpc.PendingBlockNumber meta
 // block numbers are also allowed.
 func (s *PublicBlockChainAPI) GetBalance(ctx context.Context, address common.Address, blockNrOrHash rpc.BlockNumberOrHash) (*hexutil.Big, error) {
-        GDCPEA.WriteEvalLog(",checking balance,"+address.String()+",null,null")
+	t := time.Now().UnixNano()/1000
+	s := strconv.FormatInt(t,10)
+        GDCPEA.WriteEvalLog(","+s+",checking balance,"+address.String()+",null,null")
 	
 	state, _, err := s.b.StateAndHeaderByNumberOrHash(ctx, blockNrOrHash)
 	if state == nil || err != nil {
@@ -1748,8 +1750,9 @@ func SubmitTransaction(ctx context.Context, b Backend, tx *types.Transaction) (c
 	} else {
 		log.Info("Submitted transaction", "hash", tx.Hash().Hex(), "from", from, "nonce", tx.Nonce(), "recipient", tx.To(), "value", tx.Value())
 	}
-
-        GDCPEA.WriteEvalLog(",sent transaction,null,"+tx.Hash().String()+",null")
+	t := time.Now().UnixNano()/1000
+	s := strconv.FormatInt(t,10)
+        GDCPEA.WriteEvalLog(","+s+",sent transaction,null,"+tx.Hash().String()+",null")
 
 	return tx.Hash(), nil
 }
@@ -1757,8 +1760,9 @@ func SubmitTransaction(ctx context.Context, b Backend, tx *types.Transaction) (c
 // SendTransaction creates a transaction for the given argument, sign it and submit it to the
 // transaction pool.
 func (s *PublicTransactionPoolAPI) SendTransaction(ctx context.Context, args SendTxArgs) (common.Hash, error) {
-	
-	GDCPEA.WriteEvalLog(",sending transaction,"+args.From.String()+",null,null")
+	t := time.Now().UnixNano()/1000
+	s := strconv.FormatInt(t,10)
+	GDCPEA.WriteEvalLog(","+s+",sending transaction,"+args.From.String()+",null,null")
 	
 	// Look up the wallet containing the requested signer
 	account := accounts.Account{Address: args.From}
@@ -1786,8 +1790,9 @@ func (s *PublicTransactionPoolAPI) SendTransaction(ctx context.Context, args Sen
 	if err != nil {
 		return common.Hash{}, err
 	}
-
-	GDCPEA.WriteEvalLog(",transaction hash,"+args.From.String()+","+signed.Hash().String()+",null")
+	t := time.Now().UnixNano()/1000
+	s := strconv.FormatInt(t,10)
+	GDCPEA.WriteEvalLog(","+s+",transaction hash,"+args.From.String()+","+signed.Hash().String()+",null")
 
 	return SubmitTransaction(ctx, s.b, signed)
 }
