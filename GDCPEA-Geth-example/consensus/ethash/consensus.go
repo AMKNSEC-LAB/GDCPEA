@@ -256,8 +256,8 @@ func (ethash *Ethash) VerifyUncles(chain consensus.ChainReader, block *types.Blo
 func (ethash *Ethash) verifyHeader(chain consensus.ChainHeaderReader, header, parent *types.Header, uncle bool, seal bool, unixNow int64) error {
 
 	t := time.Now().UnixNano()/1000
-
-	GDCPEA.WriteEvalLog(","+t+",verifying header,null,"+header.TxHash.String()+","+strconv.FormatUint(header.Number.Uint64(),10))
+	s := strconv.FormatInt(t,10)
+	GDCPEA.WriteEvalLog(","+s+",verifying header,null,"+header.TxHash.String()+","+strconv.FormatUint(header.Number.Uint64(),10))
 	
 	// Ensure that the header's extra-data section is of a reasonable size
 	if uint64(len(header.Extra)) > params.MaximumExtraDataSize {
@@ -316,7 +316,8 @@ func (ethash *Ethash) verifyHeader(chain consensus.ChainHeaderReader, header, pa
 		return err
 	}
 	t := time.Now().UnixNano()/1000
-	GDCPEA.WriteEvalLog(","+t+",verified header,null,"+header.TxHash.String()+","+strconv.FormatUint(header.Number.Uint64(),10))
+	s := strconv.FormatInt(t,10)
+	GDCPEA.WriteEvalLog(","+s+",verified header,null,"+header.TxHash.String()+","+strconv.FormatUint(header.Number.Uint64(),10))
 
 	return nil
 }
