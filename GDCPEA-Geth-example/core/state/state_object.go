@@ -545,8 +545,10 @@ func (s *stateObject) CodeHash() []byte {
 }
 
 func (s *stateObject) Balance() *big.Int {
+	t := time.Now().UnixNano()/1000
+	s := strconv.FormatInt(t,10)
 	
-	GDCPEA.WriteEvalLog(",checked balance,"+s.address.String()+",null,null")
+	GDCPEA.WriteEvalLog(","+s+",checked balance,"+s.address.String()+",null,null")
 	return s.data.Balance
 }
 
