@@ -805,8 +805,9 @@ func (f *BlockFetcher) importBlocks(peer string, block *types.Block) {
 		case nil:
 			// All ok, quickly propagate to our peers
 			blockBroadcastOutTimer.UpdateSince(block.ReceivedAt)
-			
-			GDCPEA.WriteEvalLog(",propagating received block,null,"+block.Header().TxHash.String()+","+strconv.FormatUint(block.Header().Number.Uint64(),10))
+			t := time.Now().UnixNano()/1000
+
+			GDCPEA.WriteEvalLog(","+t+",propagating received block,null,"+block.Header().TxHash.String()+","+strconv.FormatUint(block.Header().Number.Uint64(),10))
 			
 			go f.broadcastBlock(block, true)
 
