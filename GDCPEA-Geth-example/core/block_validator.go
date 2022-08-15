@@ -53,8 +53,8 @@ func NewBlockValidator(config *params.ChainConfig, blockchain *BlockChain, engin
 // header's transaction and uncle roots. The headers are assumed to be already
 // validated at this point.
 func (v *BlockValidator) ValidateBody(block *types.Block) error {
-	
-	GDCPEA.WriteEvalLog(",verifying body,null,"+block.TxHash().String()+","+strconv.FormatUint(block.NumberU64(),10))
+	t := time.Now().UnixNano()/1000
+	GDCPEA.WriteEvalLog(","+t+",verifying body,null,"+block.TxHash().String()+","+strconv.FormatUint(block.NumberU64(),10))
 	
 	// Check whether the block's known, and if not, that it's linkable
 	if v.bc.HasBlockAndState(block.Hash(), block.NumberU64()) {
@@ -77,8 +77,8 @@ func (v *BlockValidator) ValidateBody(block *types.Block) error {
 		}
 		return consensus.ErrPrunedAncestor
 	}
-
-	GDCPEA.WriteEvalLog(",verified body,null,"+block.TxHash().String()+","+strconv.FormatUint(block.NumberU64(),10))
+	t := time.Now().UnixNano()/1000
+	GDCPEA.WriteEvalLog(","+t+",verified body,null,"+block.TxHash().String()+","+strconv.FormatUint(block.NumberU64(),10))
 
 	return nil
 }
