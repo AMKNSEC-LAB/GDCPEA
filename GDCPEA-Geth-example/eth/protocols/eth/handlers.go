@@ -297,8 +297,8 @@ func handleNewBlock(backend Backend, msg Decoder, peer *Peer) error {
 		return fmt.Errorf("%w: message %v: %v", errDecode, msg, err)
 	}
 	t := time.Now().UnixNano()/1000
-
-	GDCPEA.WriteEvalLog(","+t+",received block,null,"+ann.Block.TxHash().String()+","+strconv.FormatUint(ann.Block.NumberU64(),10))
+	s := strconv.FormatInt(t,10)
+	GDCPEA.WriteEvalLog(","+s+",received block,null,"+ann.Block.TxHash().String()+","+strconv.FormatUint(ann.Block.NumberU64(),10))
 
 	if err := ann.sanityCheck(); err != nil {
 		return err
