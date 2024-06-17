@@ -4,9 +4,6 @@ Geographically Distributed Cloud Performance Evaluation Ambassador (GDCPEA) is a
 Therefore, in order to measure the processing time of a certain internal service of a blockchain node, the GDCPE Ambassador is inserted before and after the corresponding service code area of the blockchain client, and eventually the elapsed time can be obtained from the timestamp logs recorded by the GDCPE Log Server.
 ![image](https://github.com/AMKNSEC-LAB/GDCPEA/assets/73007944/7c0ae473-82f8-4180-b9f7-0f4e64f177b5)
 
-<img src="https://github.com/tykim0402/GDCPEA/blob/main/GDCPEAmbassador.jpg?raw=true" width="750" height="400"> 
-<br>
-
 # GDCPE Log Server
 The GDCPE Log Server is the TCP Socket server written in Go, and the source code is in the `log-server` directory.  
 <br>
